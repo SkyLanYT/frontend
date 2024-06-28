@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
 import s from './UsedTents.module.css';
-// import { usedTents } from 'constants/usedTents';
 import usedTent from '../../images/usedTent.png';
 import { isMobile } from 'constants/useMediaQueries';
 import PaginatedUniqueOffers from 'components/paginatedUniqueOffers/PaginatedUniqueOffers';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export function TentsByUser({
@@ -14,53 +15,72 @@ export function TentsByUser({
   sectionRef,
 }) {
   const { t } = useTranslation();
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, 'dd.MM.yyyy HH:mm');
+  };
+
   return (
     <>
       <ul className={s.usedTentList} ref={sectionRef}>
         {currentItems.map((el, i) => (
           <li
             className={s.usedTentItem}
-            key={el.title + i}
-            onClick={handleClick}
+            key={el.id}
+            onClick={() => handleClick(el.id)}
           >
             <img
               className={s.usedTentImage}
-              src={el.img ? el.img : usedTent}
+              src={el.photo ? `http://127.0.0.1:8000${el.photo}` : usedTent}
               alt={el.title}
             />
             <p className={s.tentTitle}>{el.title}</p>
             <p className={s.tentPrice}>{el.price} грн</p>
             <p className={s.tentLocation}> {el.location}</p>
-            <p className={s.date}> {el.createdAt}</p>
+            <p className={s.date}> {formatDate(el.created_at)}</p>
           </li>
         ))}
       </ul>
       <div>
-        <NavLink className={`${s.link} ${s.addOgo}`} to={'add-announcement'}>
+        <a
+          className={`${s.link} ${s.addOgo}`}
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfWJaJGUF_m3BUhlbLmJrlWl6SMxDKl6jbqGwwP2fYgOSHDBQ/viewform?usp=sf_link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {t('Add announcement')}
-        </NavLink>
-        {!isAccessToken && (
-          <NavLink className={`${s.link} ${s.loginLink}`} to={'login'}>
-            {t('Enter')}/ {t('Register')}
-          </NavLink>
-        )}
+        </a>
       </div>
     </>
   );
 }
 
-const UsedTents = ({ usedTents }) => {
+const UsedTents = () => {
   const mobileScreen = isMobile();
-  const visibleOffers = mobileScreen ? usedTents.slice(0, 6) : usedTents;
+  const [usedTents, setUsedTents] = useState([]);
+
+  useEffect(() => {
+    const fetchUsedTents = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/posts/');
+        setUsedTents(response.data);
+      } catch (error) {
+        console.error('Error fetching used tents:', error);
+      }
+    };
+
+    fetchUsedTents();
+  }, []);
+
   const navigate = useNavigate();
 
-  const handleClick = e => {
-    navigate('used-tents');
-     window.scrollTo({
-       top: 0,
-       behavior: "instant"
-     });
-    
+  const handleClick = id => {
+    navigate(`/announcement/${id}`);
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
   };
 
   const sectionRef = useRef(null);
@@ -70,7 +90,7 @@ const UsedTents = ({ usedTents }) => {
   };
 
   return mobileScreen ? (
-    <TentsByUser currentItems={visibleOffers} handleClick={handleClick} />
+    <TentsByUser currentItems={usedTents} handleClick={handleClick} />
   ) : (
     <PaginatedUniqueOffers
       itemsPerPage={8}

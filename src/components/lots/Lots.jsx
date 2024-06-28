@@ -11,13 +11,13 @@ import { useIsMobile } from 'constants/useMediaQueries';
 
 const Lots = () => {
   const { t } = useTranslation();
-const mobileScreen = useIsMobile()
-const [tents, setTents] = useState(usedTents);
+  const mobileScreen = useIsMobile();
+  const [tents, setTents] = useState(usedTents);
 
   const handleSubmit = (search) => {
     const visibleTents = usedTents.filter(el => el.title.toLowerCase().includes(search.toLowerCase()));
-    setTents(visibleTents)
-  }
+    setTents(visibleTents);
+  };
 
   return (
     <section className={s.section}>
@@ -26,13 +26,14 @@ const [tents, setTents] = useState(usedTents);
         <span className={s.styledTitle}>{t('Lots')}</span>
       </h2>
       <SearchTents t={t} handleSubmit={handleSubmit} />
-     { mobileScreen&&
-      <div className={s.categoryTitle}>
-        <h3 className={s.subtitle}>{t('Category')}</h3>
-        <NavLink className={s.usedTentsLink} to={'/used-tents'}>
-          {t('See all')}
-        </NavLink>
-      </div>}
+      {mobileScreen &&
+        <div className={s.categoryTitle}>
+          <h3 className={s.subtitle}>{t('Category')}</h3>
+          <NavLink className={s.usedTentsLink} to={'/used-tents'}>
+            {t('See all')}
+          </NavLink>
+        </div>
+      }
       <div style={{ position: 'relative', marginBottom: '30px' }}>
         <PaginatedCategories category={searchCategory} />
       </div>

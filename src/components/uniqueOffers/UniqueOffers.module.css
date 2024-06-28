@@ -1,6 +1,7 @@
-/* .section {
+.section {
   padding: 16px 0;
-} */
+}
+
 .offersList {
   display: flex;
   flex-wrap: nowrap;
@@ -14,7 +15,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: calc((100% - 16px) / 1.5); */
   border: 2px solid rgba(2, 129, 94, 1);
   padding: 20px 10px;
 }
@@ -41,6 +41,7 @@
   font-weight: 300;
   letter-spacing: -0.39px;
 }
+
 .offerPrice {
   font-size: 16px;
   font-weight: 700;
@@ -58,12 +59,12 @@
   text-align: left;
   margin-bottom: 10px;
   overflow: hidden;
-  -webkit-line-clamp: 3; /* Кількість рядків, які будуть відображені */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  line-clamp: 3; /* Кількість рядків, які будуть відображені */
+  line-clamp: 3;
   box-orient: vertical;
-  max-height: calc(1.5em * 3); /* Висота максимально трьох рядків тексту */
-  text-overflow: ellipsis; /* Відображення "..." для обрізаного тексту */
+  max-height: calc(1.5em * 3);
+  text-overflow: ellipsis;
 }
 
 .offerBuyBtn {
@@ -72,11 +73,11 @@
   background-color: rgba(2, 129, 94, 1);
   color: white;
   margin-top: 10px;
-  /* width: 70%; */
   font-size: 13px;
   font-weight: 600;
   line-height: 15.73px;
   text-align: center;
+  animation: blink 1.5s infinite;
 }
 
 @keyframes blink {
@@ -85,17 +86,13 @@
     border: 2px solid rgba(2, 129, 94, 1);
     background: rgba(2, 129, 94, 1);
     color: #ffffff;
-  } /* Початковий стан і половина тривалості */
+  }
   50%,
   100% {
     border: 2px solid rgba(2, 129, 94, 1);
     background-color: #ffffff;
     color: rgba(2, 129, 94, 1);
-  } /* Кінцевий стан */
-}
-
-.offerBuyBtn {
-  animation: blink 1.5s infinite; /* Запуск анімації "blink" з тривалістю 1.5с, нескінченно повторюється */
+  }
 }
 
 .promotionDesktop {
@@ -111,7 +108,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* width: calc((100%-10%)); */
     justify-content: space-evenly;
     overflow: hidden;
   }
@@ -142,7 +138,6 @@
     justify-content: center;
     align-items: center;
     padding: 6px 18px;
-
     width: 160px;
     height: 44px;
   }
@@ -151,6 +146,7 @@
     color: red;
     font-weight: bold;
   }
+
   .promotionWrapper {
     width: 100%;
     display: flex;
@@ -169,8 +165,27 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
-    margin-top: 84px;
+    margin-top: 27px;
     font-size: 32px;
+    cursor: pointer;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .arrow {
+    font-size: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+
+  .pageNumber {
+    font-size: 18px;
+    font-weight: bold;
   }
 
   .pageClassName {
@@ -178,14 +193,19 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    color: white;
+    color: #000000;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     cursor: pointer;
   }
+
   .activePage {
     background-color: rgba(2, 129, 94, 1);
-    color: rgba(2, 129, 94, 1);
+    color: rgb(0, 0, 0);
   }
+}
+
+.arrow:hover {
+  cursor: pointer;
 }

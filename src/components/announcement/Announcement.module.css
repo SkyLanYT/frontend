@@ -27,21 +27,13 @@
   width: 80%;
   margin: 0 auto;
 }
-/* 
-.usedTentList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 10px;
-  margin: 0 auto;
+
+.imageBox {
+  width: 305px;
 }
-.usedTentItem {
-  display: flex;
-  flex-direction: column;
-  width: calc(90% / 2);
-} */
 
 .descTitle {
+  width: 100%;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -50,12 +42,13 @@
   margin-bottom: 22px;
 }
 
-.description {
+.descriptionWrapper {
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.01em;
   text-align: justify;
   margin-bottom: 22px;
+  width: 150%;
 }
 
 .price {
@@ -84,6 +77,7 @@
   text-align: center;
   color: rgba(2, 129, 94, 1);
 }
+
 .owner {
   font-weight: 700;
 }
@@ -118,12 +112,46 @@
   gap: 10px;
 }
 
+.relatedAdsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px; /* Adjust gap between items */
+  margin: 0 auto;
+}
+
+.relatedAdsItem {
+  display: flex;
+  flex-direction: column;
+  width: calc(90% / 2);
+  text-align: center;
+  margin-bottom: 20px; /* Add margin to separate items */
+}
+
+.relatedAdsImage {
+  width: 100%;
+  height: 210px; /* Встановлюємо фіксовану висоту */
+  object-fit: cover; /* Зображення заповнює контейнер з збереженням пропорцій */
+}
+
+.relatedAdsPrice {
+  font-size: 16px;
+  font-weight: 700;
+  color: red;
+}
+
+.relatedAdsLocation,
+.relatedAdsDate {
+  font-size: 14px;
+}
+
 @media screen and (min-width: 768px) {
   .announSection {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
+
   .annoucementWrapper {
     display: flex;
     gap: 24px;
@@ -145,6 +173,7 @@
     text-align: center;
     color: rgba(2, 129, 94, 1);
   }
+
   .image {
     width: 100%;
   }
@@ -168,31 +197,42 @@
     text-align: left;
   }
 
-  .description {
+  .descriptionWrapper {
     width: 50%;
     font-size: 18px;
     line-height: 30px;
     text-align: left;
   }
+
   .ownerWrapper {
     width: 20%;
   }
+
   .ownerWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .usedTentList {
+  .relatedAdsList {
     display: flex;
     width: 100%;
-    gap: 10px;
+    gap: 20px;
   }
-  .usedTentItem {
+
+  .relatedAdsItem {
     display: flex;
     flex-direction: column;
-    width: calc((100% - 60px) / 4);
+    width: calc((100% - 80px) / 4);
+    margin-bottom: 20px;
   }
+
+  .relatedAdsImage {
+    width: 100%;
+    height: 210px; /* Встановлюємо фіксовану висоту */
+    object-fit: cover; /* Зображення заповнює контейнер з збереженням пропорцій */
+  }
+
   .callBtn {
     width: 100%;
     height: 54px;
